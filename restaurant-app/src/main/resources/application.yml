@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: Restro-App
+
+  datasource:
+    #jdbc:db://host:port/DbName
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: appUser
+    password: appuser123
+    driverClassName: org.postgresql.Driver
