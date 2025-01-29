@@ -5,6 +5,12 @@ spring:
   datasource:
     #jdbc:db://host:port/DbName
     url: jdbc:postgresql://localhost:5432/postgres
-    username: appUser
-    password: appuser123
+    username: appOwner
+    password: appowner@2003
     driverClassName: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
