@@ -1,13 +1,11 @@
 package com.restaurant.restaurant_app.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 @Entity
+@Data
 @Table(name="restaurant_owner")
-@Getter
-@Setter
 public class RestaurantOwner {
 
     @Id
@@ -44,7 +42,7 @@ public class RestaurantOwner {
     private String password;
 
     public enum GovernmentIdType{
-        Pancard, Aadharcard;
+        Pancard, Aadharcard
     }
 
 }

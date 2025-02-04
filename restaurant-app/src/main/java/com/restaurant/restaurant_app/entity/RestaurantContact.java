@@ -1,13 +1,12 @@
 package com.restaurant.restaurant_app.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+
 
 @Entity
+@Data
 @Table(name="restaurant_contact")
-@Getter
-@Setter
 public class RestaurantContact {
 
     @Id

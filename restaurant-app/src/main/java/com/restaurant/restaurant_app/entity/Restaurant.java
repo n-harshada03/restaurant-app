@@ -1,27 +1,28 @@
 package com.restaurant.restaurant_app.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Builder;
+import lombok.Data;
 
-import java.util.List;
 
+@Builder
 @Entity
+@Data
 @Table(name="restaurant")
-@Getter
-@Setter
 public class Restaurant {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "restro_id")
     private int restroId;
 
     @Column(name="restro_name", length = 100, nullable = false)
     private String restroName;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name="restro_type", nullable = false)
-    private RestroType restroType;
+//    @Enumerated(EnumType.STRING)
+    @Column(name="restro_type", length=50,nullable = false)
+//    private RestroType restroType;
+    private String restroType;
 
     @Column(name="speciality", length = 200)
     private String speciality;
@@ -35,12 +36,14 @@ public class Restaurant {
     @Column(name="closing_hour", length = 20, nullable = false)
     private String closingHour;
 
-    @OneToMany(mappedBy = "restaurant")
-    private List<RestaurantAddress> baseAddress;
+//    @ManyToOne
+//    @JoinColumn(name="address_id",nullable = false)
+//    private RestaurantAddress baseAddress;
 
-    public enum RestroType{
-        Veg, Nonveg;
-    }
+
+//    public enum RestroType{
+//        Veg, Nonveg;
+//    }
 
 }
 
