@@ -1,18 +1,16 @@
 package com.restaurant.restaurant_app.models;
 
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class RestaurantRequest {
 
-    private String name;
-    private Long mobile;
-    private String address;
-    private String city;
-    private String state;
-
+    private String restroName;
+    private String restroType;
+    private String serviceType;
+    private String speciality;
+    private String opening_hour;
+    private String closing_hour;
 
 }
