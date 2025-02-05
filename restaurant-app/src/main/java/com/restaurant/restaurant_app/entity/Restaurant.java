@@ -1,11 +1,15 @@
 package com.restaurant.restaurant_app.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Data
 @Table(name="restaurant")
