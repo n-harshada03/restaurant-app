@@ -52,19 +52,15 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     private List<RestaurantResponse> mapEntityToDTO(List<Restaurant> restaurant) {
-        List<RestaurantResponse> restaurantResponseList = new ArrayList<>();
-        for(Restaurant restro : restaurant){
-            restaurantResponseList.add(
-                    RestaurantResponse.builder()
-                            .restroName(restro.getRestroName())
-                            .restroType(restro.getRestroType())
-                            .serviceType(restro.getServiceType())
-                            .speciality(restro.getSpeciality())
-                            .opening_hour(restro.getOpeningHour())
-                            .closing_hour(restro.getClosingHour())
-                            .build()
-            );
-        }
-        return restaurantResponseList;
+        return restaurant.stream()
+                .map(restro -> RestaurantResponse.builder()
+                        .restroName(restro.getRestroName())
+                        .restroType(restro.getRestroType())
+                        .serviceType(restro.getServiceType())
+                        .speciality(restro.getSpeciality())
+                        .opening_hour(restro.getOpeningHour())
+                        .closing_hour(restro.getClosingHour())
+                        .build())
+                .toList();
     }
 }
