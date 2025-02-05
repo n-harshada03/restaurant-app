@@ -10,6 +10,8 @@ import lombok.Data;
 public class RestroOwnerRelationship {
 
     @Id
+    @SequenceGenerator(name = "seq_restro_owner_relationship",sequenceName = "seq_restro_owner_relationship",allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "seq_restro_owner_relationship")
     @Column(name = "id")
     private int id;
 

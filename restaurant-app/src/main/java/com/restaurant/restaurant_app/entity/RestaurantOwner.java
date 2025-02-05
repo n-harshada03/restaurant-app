@@ -9,6 +9,8 @@ import lombok.Data;
 public class RestaurantOwner {
 
     @Id
+    @SequenceGenerator(name = "seq_restaurant_owner",sequenceName = "seq_restaurant_owner",allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "seq_restaurant_owner")
     @Column(name = "owner_id")
     private int ownerId;
 

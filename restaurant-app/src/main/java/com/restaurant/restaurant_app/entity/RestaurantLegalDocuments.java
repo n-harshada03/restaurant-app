@@ -11,6 +11,8 @@ public class RestaurantLegalDocuments {
 
 
     @Id
+    @SequenceGenerator(name = "seq_restaurant_legal_documents",sequenceName = "seq_restaurant_legal_documents",allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "seq_restaurant_legal_documents")
     @Column(name="legal_id")
     private int legalId;
 

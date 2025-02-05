@@ -10,6 +10,8 @@ import lombok.Data;
 public class RestaurantContact {
 
     @Id
+    @SequenceGenerator(name = "seq_restaurant_contact",sequenceName = "seq_restaurant_contact",allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "seq_restaurant_contact")
     @Column(name = "contact_id")
     private int contactId;
 

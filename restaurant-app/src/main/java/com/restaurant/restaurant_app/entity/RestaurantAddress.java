@@ -9,6 +9,8 @@ import lombok.Data;
 public class RestaurantAddress {
 
     @Id
+    @SequenceGenerator(name = "seq_restaurant_address",sequenceName = "seq_restaurant_address",allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "seq_restaurant_address")
     @Column(name = "address_id")
     private int addressId;
 
