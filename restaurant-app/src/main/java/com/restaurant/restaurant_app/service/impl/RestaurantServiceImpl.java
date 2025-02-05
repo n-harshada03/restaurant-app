@@ -40,6 +40,16 @@ public class RestaurantServiceImpl implements RestaurantService {
         return listOfRestaurants;
     }
 
+    @Override
+    public boolean deleteRestaurant(String restroName) {
+        if(restaurantRepository.existsByRestroName(restroName)){
+            restaurantRepository.deleteByRestroName(restroName);
+            return true;
+        }
+
+        return false;
+    }
+
     private Restaurant mapDTOtoEntity(RestaurantRequest restaurantRequest) {
         return Restaurant.builder()
                 .restroName(restaurantRequest.getRestroName())

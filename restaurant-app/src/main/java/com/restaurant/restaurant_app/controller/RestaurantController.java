@@ -35,4 +35,10 @@ public class RestaurantController {
         return new ResponseEntity<>("Restro name is " + restaurantRequest.getRestroName() + " and restro type is " + restaurantRequest.getRestroType(),HttpStatus.OK);
     }
 
+    @DeleteMapping("/deleteByName/{name}")
+    public ResponseEntity<String> deleteRestaurantByName(@PathVariable("name") String restroName){
+        restaurantService.deleteRestaurant(restroName);
+        return new ResponseEntity<>("Restaurant " + restroName + " is deleted. ",HttpStatus.OK);
+    }
+
 }

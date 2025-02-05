@@ -12,4 +12,6 @@ public interface RestaurantService {
 
     public List<RestaurantResponse> getRestaurants();
 
+    public boolean deleteRestaurant(String restroName);
+
 }
