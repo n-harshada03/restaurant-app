@@ -2,10 +2,14 @@ package com.restaurant.restaurant_app.service.impl;
 
 import com.restaurant.restaurant_app.entity.Restaurant;
 import com.restaurant.restaurant_app.models.RestaurantRequest;
+import com.restaurant.restaurant_app.models.RestaurantResponse;
 import com.restaurant.restaurant_app.repository.RestaurantRepository;
 import com.restaurant.restaurant_app.service.RestaurantService;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
@@ -22,11 +26,18 @@ public class RestaurantServiceImpl implements RestaurantService {
         Restaurant restaurant=mapDTOtoEntity(restaurantRequest);
         Restaurant persistedDetails= restaurantRepository.save(restaurant); //save to database
 
-        if (ObjectUtils.isEmpty(persistedDetails)) {
+        if(ObjectUtils.isEmpty(persistedDetails)) {
             return false;
         }
 
         return true;
+    }
+
+    @Override
+    public List<RestaurantResponse> getRestaurants() {
+        List<Restaurant> restaurant = restaurantRepository.findAll();//retrieve all records
+        List<RestaurantResponse> listOfRestaurants = mapEntityToDTO(restaurant);//converts DTO into obj
+        return listOfRestaurants;
     }
 
     private Restaurant mapDTOtoEntity(RestaurantRequest restaurantRequest) {
@@ -38,5 +49,22 @@ public class RestaurantServiceImpl implements RestaurantService {
                 .openingHour(restaurantRequest.getOpening_hour())
                 .closingHour(restaurantRequest.getClosing_hour())
                 .build();
+    }
+
+    private List<RestaurantResponse> mapEntityToDTO(List<Restaurant> restaurant) {
+        List<RestaurantResponse> restaurantResponseList = new ArrayList<>();
+        for(Restaurant restro : restaurant){
+            restaurantResponseList.add(
+                    RestaurantResponse.builder()
+                            .restroName(restro.getRestroName())
+                            .restroType(restro.getRestroType())
+                            .serviceType(restro.getServiceType())
+                            .speciality(restro.getSpeciality())
+                            .opening_hour(restro.getOpeningHour())
+                            .closing_hour(restro.getClosingHour())
+                            .build()
+            );
+        }
+        return restaurantResponseList;
     }
 }
