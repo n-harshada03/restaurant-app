@@ -41,4 +41,15 @@ public class RestaurantController {
         return new ResponseEntity<>("Restaurant " + restroName + " is deleted. ",HttpStatus.OK);
     }
 
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> updateRestaurant(@PathVariable("id") int restroId, @RequestBody RestaurantRequest restaurantRequest){
+        boolean isUpdated =  restaurantService.updateRestaurant(restroId,restaurantRequest);
+        if(isUpdated){
+            return new ResponseEntity<>("Restaurant details updated. ",HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<>("Restaurant not found. ",HttpStatus.NOT_FOUND);
+        }
+    }
+
 }

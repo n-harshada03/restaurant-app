@@ -10,6 +10,7 @@ import org.springframework.util.ObjectUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
@@ -47,6 +48,39 @@ public class RestaurantServiceImpl implements RestaurantService {
             return true;
         }
 
+        return false;
+    }
+
+    @Override
+    public boolean updateRestaurant(int restroId, RestaurantRequest restaurantRequest) {
+
+        Optional<Restaurant> existingRestaurant= restaurantRepository.findById(restroId);
+        if(existingRestaurant.isPresent()){
+            Restaurant restaurant=existingRestaurant.get();
+
+            if(restaurantRequest.getRestroName()!=null){
+                restaurant.setRestroName(restaurantRequest.getRestroName());
+            }
+            if(restaurantRequest.getRestroType()!=null){
+                restaurant.setRestroType(restaurantRequest.getRestroType());
+            }
+            if(restaurantRequest.getServiceType()!=null){
+                restaurant.setServiceType(restaurantRequest.getServiceType());
+            }
+            if(restaurantRequest.getSpeciality()!=null){
+                restaurant.setSpeciality(restaurantRequest.getSpeciality());
+            }
+            if(restaurantRequest.getOpening_hour()!=null){
+                restaurant.setOpeningHour(restaurantRequest.getClosing_hour());
+            }
+            if(restaurantRequest.getClosing_hour()!=null){
+                restaurant.setClosingHour(restaurantRequest.getClosing_hour());
+            }
+
+            restaurantRepository.save(restaurant);
+            return true;
+
+        }
         return false;
     }
 

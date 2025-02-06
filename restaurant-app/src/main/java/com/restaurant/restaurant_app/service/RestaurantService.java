@@ -14,4 +14,6 @@ public interface RestaurantService {
 
     public boolean deleteRestaurant(String restroName);
 
+    public boolean updateRestaurant(int restroId,RestaurantRequest restaurantRequest);
+
 }
