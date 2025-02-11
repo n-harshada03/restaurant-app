@@ -15,6 +15,6 @@ public class RestaurantResponse {
     private String restroType;
     private String serviceType;
     private String speciality;
-    private String opening_hour;
-    private String closing_hour;
+    private String openingHour;
+    private String closingHour;
 }
