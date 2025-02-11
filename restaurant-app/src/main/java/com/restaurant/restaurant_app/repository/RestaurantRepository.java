@@ -8,13 +8,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface RestaurantRepository extends JpaRepository<Restaurant,Integer> {
-    boolean existsByRestroName(String restroName);
 
-    @Transactional
-    @Modifying
-    @Query("DELETE FROM Restaurant r WHERE r.restroName = :restroName")
-    void deleteByRestroName(@Param("restroName") String restroName);
+    Optional<Restaurant> findByRestroName(String restaurantName);
 
 }

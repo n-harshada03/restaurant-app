@@ -2,9 +2,15 @@ package com.restaurant.restaurant_app.entity;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Builder
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Table(name="restro_owner_relationship")
 public class RestroOwnerRelationship {
@@ -15,11 +21,11 @@ public class RestroOwnerRelationship {
     @Column(name = "id")
     private int id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="restro_id", nullable = false)
     private Restaurant restaurant;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="owner_id", nullable = false)
     private RestaurantOwner owner;
 }

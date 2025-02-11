@@ -1,6 +1,5 @@
 package com.restaurant.restaurant_app.service;
 
-import com.restaurant.restaurant_app.entity.Restaurant;
 import com.restaurant.restaurant_app.models.RestaurantRequest;
 import com.restaurant.restaurant_app.models.RestaurantResponse;
 
@@ -12,8 +11,7 @@ public interface RestaurantService {
 
     public List<RestaurantResponse> getRestaurants();
 
-    public boolean deleteRestaurant(String restroName);
+//    public boolean deleteRestaurant(Integer restroId);
 
-    public boolean updateRestaurant(int restroId,RestaurantRequest restaurantRequest);
-
+    public boolean updateRestaurant(String restaurantName,RestaurantRequest restaurantRequest);
 }
