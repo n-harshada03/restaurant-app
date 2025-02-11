@@ -1,10 +1,16 @@
 package com.restaurant.restaurant_app.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Builder
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name="restaurant_address")
 public class RestaurantAddress {
 
@@ -14,8 +20,8 @@ public class RestaurantAddress {
     @Column(name = "address_id")
     private int addressId;
 
-    @ManyToOne
-    @JoinColumn(name="restro_id", nullable = false)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="restro_id")
     private Restaurant restaurant;
 
     @Column(name = "address_line1",length=200, nullable = false)
@@ -33,8 +39,6 @@ public class RestaurantAddress {
     @Column(name="country",length = 50, nullable = false)
     private String country;
 
-    @Column(name="pincode",length = 10, nullable = false)
-    private String pincode;
 
 
 }

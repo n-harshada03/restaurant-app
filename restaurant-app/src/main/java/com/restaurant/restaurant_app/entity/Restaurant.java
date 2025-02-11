@@ -24,10 +24,10 @@ public class Restaurant {
     @Column(name="restro_name", length = 100, nullable = false)
     private String restroName;
 
-//    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     @Column(name="restro_type", length=50,nullable = false)
-//    private RestroType restroType;
-    private String restroType;
+    private RestroType restroType;
+//    private String restroType;
 
     @Column(name="speciality", length = 200)
     private String speciality;
@@ -41,14 +41,17 @@ public class Restaurant {
     @Column(name="closing_hour", length = 20, nullable = false)
     private String closingHour;
 
-//    @ManyToOne
-//    @JoinColumn(name="address_id",nullable = false)
-//    private RestaurantAddress baseAddress;
+    @Column(name="logo",length=50)
+    private String logo;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="address_id")
+    private RestaurantAddress baseAddress;
 
 
-//    public enum RestroType{
-//        Veg, Nonveg;
-//    }
+    public enum RestroType{
+        Veg, Nonveg;
+    }
 
 }
 

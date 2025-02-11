@@ -2,10 +2,16 @@ package com.restaurant.restaurant_app.entity;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Builder
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name="restaurant_legal_documents")
 public class RestaurantLegalDocuments {
 
@@ -16,8 +22,8 @@ public class RestaurantLegalDocuments {
     @Column(name="legal_id")
     private int legalId;
 
-    @ManyToOne
-    @JoinColumn(name="address_id",nullable = false)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="address_id")
     private RestaurantAddress address;
 
 
