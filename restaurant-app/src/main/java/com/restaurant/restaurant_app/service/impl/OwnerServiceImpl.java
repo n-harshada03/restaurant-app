@@ -75,26 +75,4 @@ public class OwnerServiceImpl implements OwnerService {
                 .build();
     }
 
-
-
-
-//    List<Restaurant> restaurant = restaurantRepository.findAll();//retrieve all records
-//    List<RestaurantResponse> listOfRestaurants = mapEntityToDTO(restaurant);//converts DTO into obj
-//        return listOfRestaurants;
-//}
-//
-//
-////    Transforms each Restaurant object into a RestaurantResponse.
-//private List<RestaurantResponse> mapEntityToDTO(List<Restaurant> restaurant) {
-//    return restaurant.stream()
-//            .map(restro -> RestaurantResponse.builder()
-//                    .restroName(restro.getRestroName())
-//                    .restroType(String.valueOf(restro.getRestroType()))
-//                    .serviceType(restro.getServiceType())
-//                    .speciality(restro.getSpeciality())
-//                    .openingHour(restro.getOpeningHour())
-//                    .closingHour(restro.getClosingHour())
-//                    .build())
-//            .toList();
-//}
 }
