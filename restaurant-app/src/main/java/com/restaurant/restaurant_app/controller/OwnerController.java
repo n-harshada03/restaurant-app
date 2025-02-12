@@ -1,6 +1,7 @@
 package com.restaurant.restaurant_app.controller;
 
 import com.restaurant.restaurant_app.models.OwnerRequest;
+import com.restaurant.restaurant_app.models.OwnerResponse;
 import com.restaurant.restaurant_app.models.RestaurantResponse;
 import com.restaurant.restaurant_app.service.OwnerService;
 import org.springframework.http.HttpStatus;
@@ -36,8 +37,17 @@ public class OwnerController {
     public ResponseEntity<List<RestaurantResponse>> getRestaurantsByOwnerEmail(@RequestParam String email) {
         List<RestaurantResponse> restaurants = ownerService.getAllRestaurantsByOwnerEmail(email);
         if (restaurants.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(restaurants);
+            return new ResponseEntity<>(restaurants, HttpStatus.NOT_FOUND);
         }
-        return ResponseEntity.ok(restaurants);
+        return new ResponseEntity<>(restaurants, HttpStatus.OK);
+    }
+
+    @GetMapping("getowners")
+    public ResponseEntity<List<OwnerResponse>> getAllOwners(){
+        List<OwnerResponse> owners=ownerService.getAllOwners();
+        if(owners.isEmpty()){
+            return new ResponseEntity<>(owners,HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(owners,HttpStatus.OK);
     }
 }

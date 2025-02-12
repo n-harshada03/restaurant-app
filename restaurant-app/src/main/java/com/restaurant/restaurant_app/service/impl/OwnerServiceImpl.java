@@ -4,6 +4,7 @@ import com.restaurant.restaurant_app.entity.Restaurant;
 import com.restaurant.restaurant_app.entity.RestaurantOwner;
 import com.restaurant.restaurant_app.entity.RestroOwnerRelationship;
 import com.restaurant.restaurant_app.models.OwnerRequest;
+import com.restaurant.restaurant_app.models.OwnerResponse;
 import com.restaurant.restaurant_app.models.RestaurantResponse;
 import com.restaurant.restaurant_app.repository.RestaurantOwnerRepository;
 import com.restaurant.restaurant_app.repository.RestaurantRepository;
@@ -64,6 +65,8 @@ public class OwnerServiceImpl implements OwnerService {
                 .toList();
     }
 
+    //write query for this
+    //transform each Restaurant object into a RestaurantResponse
     private RestaurantResponse mapToResponse(Restaurant restaurant) {
         return RestaurantResponse.builder()
                 .restroName(restaurant.getRestroName())
@@ -73,6 +76,25 @@ public class OwnerServiceImpl implements OwnerService {
                 .openingHour(restaurant.getOpeningHour())
                 .closingHour(restaurant.getClosingHour())
                 .build();
+    }
+
+    @Override
+    public List<OwnerResponse> getAllOwners() {
+        List<RestaurantOwner> owner=restaurantOwnerRepository.findAll();
+        List<OwnerResponse> listOfOwners=mapEntityToResponse(owner);
+        return listOfOwners;
+    }
+
+    private List<OwnerResponse> mapEntityToResponse(List<RestaurantOwner> owner) {
+
+        return owner.stream()
+                .map(newOwner -> OwnerResponse.builder()
+                        .ownerFirstName(newOwner.getFirstName())
+                        .ownerLastName(newOwner.getLastName())
+                        .ownerMobileNumber(newOwner.getMobile())
+                        .ownerEmail(newOwner.getEmail())
+                        .build())
+                .toList();
     }
 
 }
