@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: Restro-App
+
+  datasource:
+    #jdbc:db://host:port/DbName
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: appUser
+    password: appuser@2003
+    driverClassName: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+
+test:
+  property:
+    dummy: ABC
