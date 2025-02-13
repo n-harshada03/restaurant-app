@@ -2,6 +2,7 @@ package com.restaurant.restaurant_app.controller;
 
 import com.restaurant.restaurant_app.models.RestaurantRequest;
 import com.restaurant.restaurant_app.models.RestaurantResponse;
+import com.restaurant.restaurant_app.service.OwnerService;
 import com.restaurant.restaurant_app.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -16,9 +17,11 @@ import java.util.List;
 public class RestaurantController {
 
     private final RestaurantService restaurantService;
+    private final OwnerService ownerService;
 
-    public RestaurantController(@Qualifier("restaurantServiceImpl") RestaurantService restaurantService) { //dependency injected
+    public RestaurantController(@Qualifier("restaurantServiceImpl") RestaurantService restaurantService, OwnerService ownerService) { //dependency injected
         this.restaurantService = restaurantService;
+        this.ownerService = ownerService;
     }
 
 
@@ -35,6 +38,15 @@ public class RestaurantController {
     @GetMapping("/getAllRestaurants")
     public ResponseEntity<List<RestaurantResponse>> getAllRestaurants(){
         return new ResponseEntity<>(restaurantService.getRestaurants(),HttpStatus.OK);
+    }
+
+    @GetMapping("/getrestaurants")
+    public ResponseEntity<List<RestaurantResponse>> getRestaurantsByOwnerEmail(@RequestParam String email) {
+        List<RestaurantResponse> restaurants = ownerService.getAllRestaurantsByOwnerEmail(email);
+        if (restaurants.isEmpty()) {
+            return new ResponseEntity<>(restaurants, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(restaurants, HttpStatus.OK);
     }
 
 

@@ -32,16 +32,6 @@ public class OwnerController {
         }
     }
 
-
-    @GetMapping("/getrestaurants")
-    public ResponseEntity<List<RestaurantResponse>> getRestaurantsByOwnerEmail(@RequestParam String email) {
-        List<RestaurantResponse> restaurants = ownerService.getAllRestaurantsByOwnerEmail(email);
-        if (restaurants.isEmpty()) {
-            return new ResponseEntity<>(restaurants, HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(restaurants, HttpStatus.OK);
-    }
-
     @GetMapping("getowners")
     public ResponseEntity<List<OwnerResponse>> getAllOwners(){
         List<OwnerResponse> owners=ownerService.getAllOwners();
