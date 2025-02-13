@@ -7,6 +7,7 @@ import com.restaurant.restaurant_app.repository.*;
 import com.restaurant.restaurant_app.service.RestaurantService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -136,24 +137,25 @@ public class RestaurantServiceImpl implements RestaurantService {
         if (existingRestaurant.isEmpty()) return false;
 
         Restaurant restaurant = existingRestaurant.get();
-
+        //two restro with same name
+        //objectUtils.isEmpty()-It checks for null, empty strings (""), empty collections, and empty arrays.
         // Updating restaurant details
-        restaurant.setRestroName(restaurantRequest.getRestaurantName() != null ? restaurantRequest.getRestaurantName() : restaurant.getRestroName());
-        restaurant.setRestroType(restaurantRequest.getRestroType() != null ? restaurantRequest.getRestroType() : restaurant.getRestroType());
-        restaurant.setServiceType(restaurantRequest.getServiceType() != null ? restaurantRequest.getServiceType() : restaurant.getServiceType());
-        restaurant.setSpeciality(restaurantRequest.getSpeciality() != null ? restaurantRequest.getSpeciality() : restaurant.getSpeciality());
-        restaurant.setOpeningHour(restaurantRequest.getOpeningHour() != null ? restaurantRequest.getOpeningHour() : restaurant.getOpeningHour());
-        restaurant.setClosingHour(restaurantRequest.getClosingHour() != null ? restaurantRequest.getClosingHour() : restaurant.getClosingHour());
-        restaurant.setLogo(restaurantRequest.getLogo() != null ? restaurantRequest.getLogo() : restaurant.getLogo());
+        restaurant.setRestroName(!ObjectUtils.isEmpty(restaurantRequest.getRestaurantName()) ? restaurantRequest.getRestaurantName() : restaurant.getRestroName());
+        restaurant.setRestroType(!ObjectUtils.isEmpty(restaurantRequest.getRestroType()) ? restaurantRequest.getRestroType() : restaurant.getRestroType());
+        restaurant.setServiceType(!ObjectUtils.isEmpty(restaurantRequest.getServiceType()) ? restaurantRequest.getServiceType() : restaurant.getServiceType());
+        restaurant.setSpeciality(!ObjectUtils.isEmpty(restaurantRequest.getSpeciality()) ? restaurantRequest.getSpeciality() : restaurant.getSpeciality());
+        restaurant.setOpeningHour(!ObjectUtils.isEmpty(restaurantRequest.getOpeningHour()) ? restaurantRequest.getOpeningHour() : restaurant.getOpeningHour());
+        restaurant.setClosingHour(!ObjectUtils.isEmpty(restaurantRequest.getClosingHour()) ? restaurantRequest.getClosingHour() : restaurant.getClosingHour());
+        restaurant.setLogo(!ObjectUtils.isEmpty(restaurantRequest.getLogo()) ? restaurantRequest.getLogo() : restaurant.getLogo());
 
 
-        RestaurantAddress address = restaurant.getBaseAddress() != null ? restaurant.getBaseAddress() : new RestaurantAddress();
+        RestaurantAddress address = restaurant.getBaseAddress()!= null ? restaurant.getBaseAddress() : new RestaurantAddress();
 
-        address.setAddressLine1(restaurantRequest.getAddressLine1() != null ? restaurantRequest.getAddressLine1() : address.getAddressLine1());
-        address.setAddressLine2(restaurantRequest.getAddressLine2() != null ? restaurantRequest.getAddressLine2() : address.getAddressLine2());
-        address.setCity(restaurantRequest.getCity() != null ? restaurantRequest.getCity() : address.getCity());
-        address.setState(restaurantRequest.getState() != null ? restaurantRequest.getState() : address.getState());
-        address.setCountry(restaurantRequest.getCountry() != null ? restaurantRequest.getCountry() : address.getCountry());
+        address.setAddressLine1(!ObjectUtils.isEmpty(restaurantRequest.getAddressLine1()) ? restaurantRequest.getAddressLine1() : address.getAddressLine1());
+        address.setAddressLine2(!ObjectUtils.isEmpty(restaurantRequest.getAddressLine2()) ? restaurantRequest.getAddressLine2() : address.getAddressLine2());
+        address.setCity(!ObjectUtils.isEmpty(restaurantRequest.getCity()) ? restaurantRequest.getCity() : address.getCity());
+        address.setState(!ObjectUtils.isEmpty(restaurantRequest.getState()) ? restaurantRequest.getState() : address.getState());
+        address.setCountry(!ObjectUtils.isEmpty(restaurantRequest.getCountry()) ? restaurantRequest.getCountry() : address.getCountry());
 
         restaurant.setBaseAddress(address);
 
@@ -175,7 +177,7 @@ public class RestaurantServiceImpl implements RestaurantService {
                 return newDocs;
             });
 
-            legalDocs.setFoodLicense(restaurantRequest.getFoodLicense() != null ? restaurantRequest.getFoodLicense() : legalDocs.getFoodLicense());
+            legalDocs.setFoodLicense(restaurantRequest.getFoodLicense() != null ? restaurantRequest.getFoodLicense():legalDocs.getFoodLicense());
             restaurantLegalDocumentsRepository.save(legalDocs);
 
             restaurantRepository.save(restaurant);
