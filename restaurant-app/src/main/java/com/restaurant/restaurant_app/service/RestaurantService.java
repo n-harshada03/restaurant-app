@@ -13,5 +13,5 @@ public interface RestaurantService {
 
 //    public boolean deleteRestaurant(Integer restroId);
 
-    public boolean updateRestaurant(String restaurantName,RestaurantRequest restaurantRequest);
+//    public boolean updateRestaurant(String restaurantName,RestaurantRequest restaurantRequest);
 }

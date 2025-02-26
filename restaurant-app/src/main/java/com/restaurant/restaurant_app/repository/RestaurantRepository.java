@@ -15,4 +15,7 @@ public interface RestaurantRepository extends JpaRepository<Restaurant,Integer> 
 
     Optional<Restaurant> findByRestroName(String restaurantName);
 
+    @Query("SELECT r FROM Restaurant r WHERE r.restroName = :restroName AND r.baseAddress.addressLine1 = :address AND r.baseAddress.city = :city")
+    Optional<Restaurant> findByRestroNameAndBaseAddress(@Param("restroName") String restroName,@Param("address") String address, @Param("city") String city);
+
 }

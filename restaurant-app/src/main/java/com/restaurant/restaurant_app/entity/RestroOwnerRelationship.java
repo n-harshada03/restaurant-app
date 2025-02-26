@@ -28,4 +28,9 @@ public class RestroOwnerRelationship {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="owner_id", nullable = false)
     private RestaurantOwner owner;
+
+    public RestroOwnerRelationship(RestaurantOwner owner, Restaurant restaurant) {
+        this.owner = owner;
+        this.restaurant = restaurant;
+    }
 }

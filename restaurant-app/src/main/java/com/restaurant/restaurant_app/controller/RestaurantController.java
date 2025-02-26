@@ -50,15 +50,15 @@ public class RestaurantController {
     }
 
 
-    @PutMapping("/update/{name}")
-    public ResponseEntity<String> updateRestaurant(@PathVariable("name") String restaurantName, @RequestBody RestaurantRequest restaurantRequest){
-        boolean isUpdated =  restaurantService.updateRestaurant(restaurantName,restaurantRequest);
-        if(isUpdated){
-            return new ResponseEntity<>("Restaurant details updated. ",HttpStatus.OK);
-        }
-        else{
-            return new ResponseEntity<>("Restaurant not found. ",HttpStatus.NOT_FOUND);
-        }
-    }
+//    @PutMapping("/update/{name}")
+//    public ResponseEntity<String> updateRestaurant(@PathVariable("name") String restaurantName, @RequestBody RestaurantRequest restaurantRequest){
+//        boolean isUpdated =  restaurantService.updateRestaurant(restaurantName,restaurantRequest);
+//        if(isUpdated){
+//            return new ResponseEntity<>("Restaurant details updated. ",HttpStatus.OK);
+//        }
+//        else{
+//            return new ResponseEntity<>("Restaurant not found. ",HttpStatus.NOT_FOUND);
+//        }
+//    }
 
 }

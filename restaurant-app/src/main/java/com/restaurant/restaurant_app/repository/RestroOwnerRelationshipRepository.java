@@ -1,6 +1,7 @@
 package com.restaurant.restaurant_app.repository;
 
 import com.restaurant.restaurant_app.entity.Restaurant;
+import com.restaurant.restaurant_app.entity.RestaurantOwner;
 import com.restaurant.restaurant_app.entity.RestroOwnerRelationship;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,7 +19,9 @@ public interface RestroOwnerRelationshipRepository extends JpaRepository<RestroO
     @Query("SELECT r FROM RestroOwnerRelationship r WHERE r.owner.ownerId = :ownerId")
     List<RestroOwnerRelationship> findByOwnerId(@Param("ownerId") int ownerId);
 
+    boolean existsByRestaurantAndOwner(Restaurant newRestaurant, RestaurantOwner owner);
 
-//    @Query("SELECT r FROM RestroOwnerRelationship r WHERE r.owner.ownerId = :ownerId AND r.restaurant.restroName = :restaurantName")
-//    Optional<RestroOwnerRelationship> findByOwnerAndRestroName(@Param("ownerId") int ownerId, @Param("restaurantName") String restaurantName);
+    @Query("SELECT r.restaurant from RestroOwnerRelationship r WHERE r.owner.email= :email")
+    List<Restaurant> findRestaurantsByOwnerEmail(@Param("email") String email);
+
 }

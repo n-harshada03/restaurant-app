@@ -13,6 +13,5 @@ public interface RestaurantOwnerRepository extends JpaRepository<RestaurantOwner
 
     Optional<RestaurantOwner> findByFirstNameAndLastNameAndEmail(String firstName, String lastName, String email);
 
-    Optional<RestaurantOwner> findByEmail(String email);
 
 }

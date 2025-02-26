@@ -8,11 +8,6 @@ import lombok.Data;
 @Data
 public class RestaurantRequest {
 
-//    private int ownerId;
-    private String ownerFirstName;
-    private String ownerLastName;
-    private String email;
-
     private String restaurantName;
     private Restaurant.RestroType restroType;
     private String speciality;
@@ -21,16 +16,23 @@ public class RestaurantRequest {
     private String closingHour;
     private String logo;
 
+    private String ownerFirstName;
+    private String ownerLastName;
+    private String email;
 
-    private String addressLine1;
-    private String addressLine2;
-    private String city;
-    private String state;
-    private String country;
+    private RestaurantAddressRequest address;
+    private RestaurantContactRequest contact;
+    private RestaurantDocumentRequest legalDocuments;
+
+//    private String addressLine1;
+//    private String addressLine2;
+//    private String city;
+//    private String state;
+//    private String country;
 
 
-    private String mobileNo;
+//    private String mobileNo;
 
-    private String foodLicense;
+//    private String foodLicense;
 
 }
