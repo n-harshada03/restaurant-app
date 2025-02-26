@@ -55,28 +55,30 @@ public class OwnerServiceImpl implements OwnerService {
 
     @Override
     public List<RestaurantResponse> getAllRestaurantsByOwnerEmail(String email) {
-        RestaurantOwner owner = restaurantOwnerRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("Owner not found"));
 
-        List<RestroOwnerRelationship> relationship= restroOwnerRelationshipRepository.findByOwnerId(owner.getOwnerId());
+        List<Restaurant> restaurants=restroOwnerRelationshipRepository.findRestaurantsByOwnerEmail(email);
 
-        return relationship.stream()
-                .map(rel -> mapToResponse(rel.getRestaurant()))
+        if(restaurants.isEmpty()){
+            throw new RuntimeException("No restaurants found for the given owner.");
+        }
+
+        return mapEntityToRestaurantResponse(restaurants);
+
+    }
+
+    private List<RestaurantResponse> mapEntityToRestaurantResponse(List<Restaurant> restaurants){
+        return restaurants.stream()
+                .map(restro -> RestaurantResponse.builder()
+                        .restroName(restro.getRestroName())
+                        .restroType(restro.getRestroType().toString())
+                        .serviceType(restro.getServiceType())
+                        .speciality(restro.getSpeciality())
+                        .openingHour(restro.getOpeningHour())
+                        .closingHour(restro.getClosingHour())
+                        .build())
                 .toList();
     }
 
-    //write query for this
-    //transform each Restaurant object into a RestaurantResponse
-    private RestaurantResponse mapToResponse(Restaurant restaurant) {
-        return RestaurantResponse.builder()
-                .restroName(restaurant.getRestroName())
-                .restroType(restaurant.getRestroType().toString())
-                .serviceType(restaurant.getServiceType())
-                .speciality(restaurant.getSpeciality())
-                .openingHour(restaurant.getOpeningHour())
-                .closingHour(restaurant.getClosingHour())
-                .build();
-    }
 
     @Override
     public List<OwnerResponse> getAllOwners() {

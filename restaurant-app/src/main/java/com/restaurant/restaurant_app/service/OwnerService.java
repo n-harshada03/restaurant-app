@@ -11,7 +11,7 @@ public interface OwnerService {
 
     public boolean addOwner(OwnerRequest ownerRequest);
 
-    List<RestaurantResponse> getAllRestaurantsByOwnerEmail(String email);
+    public List<RestaurantResponse> getAllRestaurantsByOwnerEmail(String email);
 
     public List<OwnerResponse> getAllOwners();
 }
