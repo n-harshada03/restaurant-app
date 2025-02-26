@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+
+    <changeSet id="create-restaurant-table" author="">
+        <createSequence sequenceName="seq_restaurant" startValue="1" incrementBy="1" cacheSize="1"/>
+        <createTable tableName="restaurant">
+            <column name="restro_id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_restaurant" nullable="false"/>
+            </column>
+
+            <column name="restro_name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="restro_type" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="speciality" type="VARCHAR(200)">
+            </column>
+
+            <column name="service_type" type="VARCHAR(30)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="opening_hour" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="closing_hour" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="logo" type="VARCHAR(50)">
+            </column>
+
+            <column name="address_id" type="BIGINT">
+            </column>
+
+        </createTable>
+    </changeSet>
+
+    <changeSet id="add-restro-type-check-constraint" author="Harshada Navale">
+        <sql>
+            ALTER TABLE restaurant ADD CONSTRAINT chk_restro_type
+            CHECK (restro_type IN ('Veg', 'Nonveg'));
+        </sql>
+    </changeSet>
+
+
+    <changeSet id="create-table-restaurant-address" author="Harshada Navale">
+        <createSequence sequenceName="seq_restaurant_address" startValue="1" incrementBy="1"/>
+        <createTable tableName="restaurant_address">
+            <column name="address_id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_restaurant_address" nullable="false"/>
+            </column>
+
+            <column name="restro_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="address_line1" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="address_line2" type="VARCHAR(200)"/>
+
+            <column name="city" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="state" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="country" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet id="create-table-restaurant-contact" author="Harshada Navale">
+        <createSequence sequenceName="seq_restaurant_contact" startValue="1" incrementBy="1"/>
+        <createTable tableName="restaurant_contact">
+            <column name="contact_id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_restaurant_contact" nullable="false"/>
+            </column>
+
+            <column name="address_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="mobile" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet id="create-table-restaurant-legal-documents" author="Harshada Navale">
+        <createSequence sequenceName="seq_restaurant_legal_documents" startValue="1" incrementBy="1"/>
+        <createTable tableName="restaurant_legal_documents">
+            <column name="legal_id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_restaurant_legal_documents" nullable="false"/>
+            </column>
+
+            <column name="address_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="food_license" type="VARCHAR(30)">
+                <constraints unique="true" nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet id="create-table-restaurant-owner" author="Harshada Navale">
+        <createSequence sequenceName="seq_restaurant_owner" startValue="1" incrementBy="1"/>
+        <createTable tableName="restaurant_owner">
+            <column name="owner_id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_restaurant_owner" nullable="false"/>
+            </column>
+
+            <column name="first_name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="middle_name" type="VARCHAR(100)"/>
+
+            <column name="last_name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="country_code" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="mobile" type="VARCHAR(10)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+
+            <column name="email" type="VARCHAR(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+
+            <column name="government_id_type" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="government_id" type="VARCHAR(20)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+
+            <column name="password" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet id="create-table-restro-owner-relationship" author="Harshada Navale">
+        <createSequence sequenceName="seq_restro_owner_relationship" startValue="1" incrementBy="1"/>
+        <createTable tableName="restro_owner_relationship">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_restro_owner_relationship" nullable="false"/>
+            </column>
+
+            <column name="restro_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="owner_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+
+
+
+    <!-- Add Foreign Key for Address -->
+    <changeSet id="add-foreign-keys" author="Harshada Navale">
+        <addForeignKeyConstraint baseTableName="restaurant"
+                                 baseColumnNames="address_id"
+                                 constraintName="fk_restaurant_address"
+                                 referencedTableName="restaurant_address"
+                                 referencedColumnNames="address_id"
+                                 onDelete="SET NULL"/>
+
+        <addForeignKeyConstraint baseTableName="restaurant_address"
+                                 baseColumnNames="restro_id"
+                                 referencedTableName="restaurant"
+                                 referencedColumnNames="restro_id"
+                                 constraintName="fk_restaurant_address_restro_id"
+                                 onDelete="CASCADE"/>
+
+        <addForeignKeyConstraint baseTableName="restro_owner_relationship"
+                                 baseColumnNames="restro_id"
+                                 referencedTableName="restaurant"
+                                 referencedColumnNames="restro_id"
+                                 constraintName="fk_restro_owner_relationship_restro"/>
+
+        <addForeignKeyConstraint baseTableName="restro_owner_relationship"
+                                 baseColumnNames="owner_id"
+                                 referencedTableName="restaurant_owner"
+                                 referencedColumnNames="owner_id"
+                                 constraintName="fk_restro_owner_relationship_owner"/>
+    </changeSet>
+
+    <changeSet id="add-government-id-type-check" author="Harshada Navale">
+        <sql>
+            ALTER TABLE restaurant_owner ADD CONSTRAINT chk_government_id_type
+            CHECK (government_id_type IN ('Pancard', 'Aadharcard'));
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

@@ -4,9 +4,9 @@ spring:
 
   datasource:
     #jdbc:db://host:port/DbName
-    url: jdbc:postgresql://localhost:5432/postgres
-    username: appUser
-    password: appuser@2003
+    url: jdbc:postgresql://localhost:5435/postgres
+    username: appOwner
+    password: appowner@2003
     driverClassName: org.postgresql.Driver
 
   jpa:
@@ -14,6 +14,12 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: none
+
+  liquibase:
+    enabled: true
+    drop-first: false
+    change-log: classpath:db.changelog/restaurant-master-changelog.xml
+    default-schema: dummy
 
 test:
   property:
