@@ -67,10 +67,8 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public boolean addRestaurant(RestaurantRequest restaurantRequest) {
 
-        Optional<RestaurantOwner> existingOwner = restaurantOwnerRepository.findByFirstNameAndLastNameAndEmail(
-                restaurantRequest.getOwnerFirstName(),
-                restaurantRequest.getOwnerLastName(),
-                restaurantRequest.getEmail());
+        Optional<RestaurantOwner> existingOwner = restaurantOwnerRepository.findByUsername(
+                restaurantRequest.getUsername());
 
         if (existingOwner.isEmpty()) {
             throw new RuntimeException("Owner not found with given details!");

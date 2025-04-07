@@ -20,6 +20,9 @@ public class RestaurantOwner {
     @Column(name = "owner_id")
     private int ownerId;
 
+    @Column(name = "username", length = 15, nullable = false, unique = true)
+    private String username;
+
     @Column(name="first_name",length=100, nullable = false)
     private String firstName;
 

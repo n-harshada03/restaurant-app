@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OwnerResponse {
+    private String username;
     private String ownerFirstName;
     private String ownerLastName;
     private String ownerMobileNumber;

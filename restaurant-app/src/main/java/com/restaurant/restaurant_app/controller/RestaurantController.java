@@ -41,8 +41,8 @@ public class RestaurantController {
     }
 
     @GetMapping("/getrestaurants")
-    public ResponseEntity<List<RestaurantResponse>> getRestaurantsByOwnerEmail(@RequestParam String email) {
-        List<RestaurantResponse> restaurants = ownerService.getAllRestaurantsByOwnerEmail(email);
+    public ResponseEntity<List<RestaurantResponse>> getRestaurantsByOwnerEmail(@RequestParam String username) {
+        List<RestaurantResponse> restaurants = ownerService.getAllRestaurantsByOwner(username);
         if (restaurants.isEmpty()) {
             return new ResponseEntity<>(restaurants, HttpStatus.NOT_FOUND);
         }

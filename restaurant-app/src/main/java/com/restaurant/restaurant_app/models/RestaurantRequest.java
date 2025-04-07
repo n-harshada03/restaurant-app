@@ -16,6 +16,7 @@ public class RestaurantRequest {
     private String closingHour;
     private String logo;
 
+    private String username;
     private String ownerFirstName;
     private String ownerLastName;
     private String email;

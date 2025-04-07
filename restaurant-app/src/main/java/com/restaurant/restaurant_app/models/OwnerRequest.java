@@ -8,6 +8,7 @@ import lombok.Data;
 @Builder
 public class OwnerRequest {
 
+    private String username;
     private String ownerFirstName;
     private String ownerMiddleName;
     private String ownerLastName;

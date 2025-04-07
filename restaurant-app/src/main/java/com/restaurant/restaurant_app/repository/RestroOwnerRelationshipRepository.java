@@ -21,7 +21,7 @@ public interface RestroOwnerRelationshipRepository extends JpaRepository<RestroO
 
     boolean existsByRestaurantAndOwner(Restaurant newRestaurant, RestaurantOwner owner);
 
-    @Query("SELECT r.restaurant from RestroOwnerRelationship r WHERE r.owner.email= :email")
-    List<Restaurant> findRestaurantsByOwnerEmail(@Param("email") String email);
+    @Query("SELECT r.restaurant from RestroOwnerRelationship r WHERE r.owner.username= :username")
+    List<Restaurant> findRestaurantsByOwnerUsername(@Param("username") String username);
 
 }

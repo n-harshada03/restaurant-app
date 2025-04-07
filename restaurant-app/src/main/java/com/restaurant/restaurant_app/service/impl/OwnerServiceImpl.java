@@ -39,6 +39,7 @@ public class OwnerServiceImpl implements OwnerService {
 
     private RestaurantOwner mapDTOtoOwnerEntity(OwnerRequest ownerRequest) {
         return new RestaurantOwner().builder()
+                .username(ownerRequest.getUsername())
                 .firstName(ownerRequest.getOwnerFirstName())
                 .middleName(ownerRequest.getOwnerMiddleName())
                 .lastName(ownerRequest.getOwnerLastName())
@@ -54,9 +55,9 @@ public class OwnerServiceImpl implements OwnerService {
 
 
     @Override
-    public List<RestaurantResponse> getAllRestaurantsByOwnerEmail(String email) {
+    public List<RestaurantResponse> getAllRestaurantsByOwner(String username) {
 
-        List<Restaurant> restaurants=restroOwnerRelationshipRepository.findRestaurantsByOwnerEmail(email);
+        List<Restaurant> restaurants=restroOwnerRelationshipRepository.findRestaurantsByOwnerUsername(username);
 
         if(restaurants.isEmpty()){
             throw new RuntimeException("No restaurants found for the given owner.");
@@ -91,6 +92,7 @@ public class OwnerServiceImpl implements OwnerService {
 
         return owner.stream()
                 .map(newOwner -> OwnerResponse.builder()
+                        .username(newOwner.getUsername())
                         .ownerFirstName(newOwner.getFirstName())
                         .ownerLastName(newOwner.getLastName())
                         .ownerMobileNumber(newOwner.getMobile())

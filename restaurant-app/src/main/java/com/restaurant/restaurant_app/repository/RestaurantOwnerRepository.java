@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
 public interface RestaurantOwnerRepository extends JpaRepository<RestaurantOwner,Integer> {
 
-    Optional<RestaurantOwner> findByFirstNameAndLastNameAndEmail(String firstName, String lastName, String email);
+    Optional<RestaurantOwner> findByUsername(String username);
 
 
 }
