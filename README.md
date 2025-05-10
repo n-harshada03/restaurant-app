@@ -1,2 +1,2 @@
 # restaurant-app
-Springboot project 
+Springboot Restaurant application project 

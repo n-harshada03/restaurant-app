@@ -1,0 +1,22 @@
+version: '3'
+services:
+  postgreSql:
+    container_name: RestaurantDB
+    image: postgres:15
+    restart: always
+    tty: true
+    stdin_open: true
+    ports:
+      - 5435:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Harshada@2003
+    volumes:
+      - my_postgres_data:/var/lib/postgresql/data
+    deploy:
+      resources:
+        limits:
+          memory: 300M
+          
+volumes:
+  my_postgres_data:
